@@ -4,14 +4,32 @@ var secretStoreFactory = require('../lib/secretStore');
 describe('secretStore Tests', function () {
   'use strict';
 
-  describe('1 having a laugh', function () {
-
+  describe('1 Callback tests', function () {
     it('1.1 should create a store and read', function (done) {
-
       secretStoreFactory.create({}, function (err, sStore) {
-        sStore.read();
-        done();
+        sStore.callbacks.loadSecrets([], function (err) {
+          sStore.callbacks.read('test', function (err, data) {
+            done();
+          });
+        });
       });
-    });
-  });
+    }); // 1.1
+  }); // 1
+
+  describe('2 Promise tests', function () {
+    it('2.1 should create a store and read', function () {
+
+      return secretStoreFactory.promiseCreate({})
+        .then(
+          function (store) {
+            console.log('promise returned store');
+            return store.promises.loadSecrets();
+          },
+
+          function (err) {
+            console.log('promise returned err');
+          }
+        );
+    }); // 2.1
+  }); // 2
 });
