@@ -2,7 +2,7 @@
 const assert = require('assert');
 const chai = require('chai');
 const expect = chai.expect;
-const kmsWrapper = require('../../lib/aws/kmsWrapper');
+const kmsWrapper = require('../lib/kmsWrapper');
 const util = require('util');
 
 // A globally unique AWS Key ID
