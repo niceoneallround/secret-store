@@ -5,6 +5,7 @@ const expect = chai.expect;
 const kmsWrapper = require('../../lib/aws/kmsWrapper');
 const util = require('util');
 
+// A globally unique AWS Key ID
 const KEY_ID =  '09165844-ec39-4e76-915a-54498ef420da';
 
 describe('kmsWrapper Tests', function () {
@@ -31,7 +32,7 @@ describe('kmsWrapper Tests', function () {
 
       return kmsW.promiseListKeys()
         .then(function (keys) {
-            //console.log(keys);
+            console.log(keys);
             assert((keys.Keys.length > 0), util.format('not enough keys:%s', keys.Keys.length));
           });
     }); // 2.1

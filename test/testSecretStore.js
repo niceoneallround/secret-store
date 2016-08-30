@@ -5,10 +5,10 @@ describe('secretStore Tests', function () {
   'use strict';
 
   describe('1 Callback tests', function () {
-    it('1.1 should create a store and read', function (done) {
+    it('1.1 should create a store, load it with a secret, and decrypt it', function (done) {
       secretStoreFactory.create({}, function (err, sStore) {
         sStore.callbacks.loadSecrets([], function (err) {
-          sStore.callbacks.read('test', function (err, data) {
+          sStore.callbacks.decryptSecret({ name: 'test' }, function (err, data) {
             done();
           });
         });
@@ -17,7 +17,7 @@ describe('secretStore Tests', function () {
   }); // 1
 
   describe('2 Promise tests', function () {
-    it('2.1 should create a store and read', function () {
+    it('2.1 should create a store, load it with a secret, and decrypt it', function () {
 
       return secretStoreFactory.promiseCreate({})
         .then(
