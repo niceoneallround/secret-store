@@ -29,6 +29,8 @@ The formatted representation holds enough information so that the cipher text ca
 
        <base64 aws key id>.<base64 cipher text>
 
+NOTE. Do not need the key id as it is part of the AWS KMS Encrypt cipher text, but had added as used for other encryption package so just decided to leave as may use.
+
 
 #Reference Material
 - http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/KMS.html - AWS SDK documentation
