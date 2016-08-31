@@ -27,7 +27,7 @@ When using AWS KMS all secrets have been encrypted by the same mechanism that is
 #Encrypted representation.
 The formatted representation holds enough information so that the cipher text can be decrypted by parties authorized by AWS IAM. It has the following format
 
-       <base64 key name>.<base64 cipher text>
+       <base64 aws key id>.<base64 cipher text>
 
 
 #Reference Material
