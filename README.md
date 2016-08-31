@@ -1,9 +1,9 @@
 # Secret Store
-Provides an in memory, in process store for secrets that have been encrypted with AWS KMS thus avoiding the need to pass them in as clear text. Examples might be database username/password, private asymmetric keys, service credentials, etc.
+Provides an in memory, in process store for secrets that have been encrypted with AWS KMS thus avoiding the need to pass them to the service as clear text. Examples might be database username/password, private asymmetric keys, service credentials, etc.
 
-Typically I pass the encrypted secret in as an environment variable, and add to the encrypted store.
+Typically I pass the encrypted secret in as an environment variable, and then the service code reads and adds to the encrypted store.
 
-Provides the following functionalities
+Provides the following functionalities:
 - addSecret(name, cipherText) function that adds a secret into the store - assumes has been encrypted as described below.
   - stored as <secret_name, encrypted_representation>.
 - decryptSecret(props, callback) function that returns the decrypted secret. It automatically adds the
