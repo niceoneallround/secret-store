@@ -1,7 +1,11 @@
-# secret-store
-Stores secrets in memory that have been encrypted with AWS KMS as follows: <secret_name, encrypted_representation>.
+# Secret Store
+Provides an in memory, in process store for secrets that have been encrypted with AWS KMS thus avoiding the need to pass them in as clear text. Examples might be database username/password, private asymmetric keys, service credentials, etc.
+
+Typically I pass the encrypted secret in as an environment variable, and add to the encrypted store.
 
 Provides the following functionalities
+- addSecret(name, cipherText) function that adds a secret into the store - assumes has been encrypted as described below.
+  - stored as <secret_name, encrypted_representation>.
 - decryptSecret(props, callback) function that returns the decrypted secret. It automatically adds the
   - props has the following fields
     - name: secret name
@@ -10,18 +14,17 @@ Provides the following functionalities
   - the encryption context is set as described below, the host na
   - if not allowed access err is 403
   - if secret not found err is 400
-- addSecret(name, cipherText) function that adds a secret into the store - assumes has been encrypted as described below.
 
 #AWS KMS Usage
-When using AWS KMS all secrets have been encrypted by the same mechanism that is
+All secrets are assumed to have been encrypted by AWS KMS in the following way
 - Uses a AWS customer master key (CMK). Main reasons use CMK are
   - Did not want to manage another key.
-  - Want an audit trail of the key usage, i.e. call AWS to decrypt and it audits the operation in cloud trail.
-  - by default provides authenticated encryption - so cannot alter the cipher text - so not need to add hmac.
+  - Provides an audit trail of the key usage, i.e. call AWS to decrypt and it audits the operation in cloud trail.
+  - Provides authenticated encryption - so cannot alter the cipher text - so not need to add hmac.
     - uses AES 256 in Galois/Counter Mode GCM.
-- Uses an encryption context of uses a combination of the secret name and the host name the service is running on.
+- Uses an Encryption Context that is a combination of the secret name and the host name the service is running on.
     - { name: <name of the secret>, hostname: <host-name>}. For example {secret_name: db_username, hostname: ms.webshield.io}
-    - This provides the Additional Authentication Data, the code will knows the secret name so will pass in, if user tried to swap encrypted secret the code will break.
+    - This provides the Additional Authentication Data, if user tried to swap encrypted secret the code will break as it will pass in the wrong context.
 - Use TLS to connect to AWS
 
 #Encrypted representation.
