@@ -2,9 +2,9 @@
   "name": "secret-store",
   "version": "1.0.0",
   "description": "Stores secrets",
-  "main": "index.js",
+  "main": "lib/secretStore.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "gulp"
   },
   "repository": {
     "type": "git",
