@@ -40,6 +40,7 @@ gulp.task('test', ['pre-test'], function () {
     .pipe(istanbul.enforceThresholds({ thresholds: { statements: 80, lines: 80, functions: 80, branches: 40 } }));
 });
 
+gulp.task('pp', ['tjshint', 'tjscs']);
 gulp.task('build', ['tjshint', 'tjscs', 'test']);
 gulp.task('release', ['build', 'nsp']);
 

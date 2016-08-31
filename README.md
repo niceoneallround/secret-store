@@ -10,7 +10,7 @@ Provides the following functionalities
   - the encryption context is set as described below, the host na
   - if not allowed access err is 403
   - if secret not found err is 400
-- loadSecret(name, cipherText) function that loads secret into the store - assumes has been encrypted as described below.
+- addSecret(name, cipherText) function that adds a secret into the store - assumes has been encrypted as described below.
 
 #AWS KMS Usage
 When using AWS KMS all secrets have been encrypted by the same mechanism that is
@@ -20,7 +20,7 @@ When using AWS KMS all secrets have been encrypted by the same mechanism that is
   - by default provides authenticated encryption - so cannot alter the cipher text - so not need to add hmac.
     - uses AES 256 in Galois/Counter Mode GCM.
 - Uses an encryption context of uses a combination of the secret name and the host name the service is running on.
-    - secret_name=<name of the secret>, hostname=<host-name>. For example secret_name=db_username, hostname=ms.webshield.io.
+    - { name: <name of the secret>, hostname: <host-name>}. For example {secret_name: db_username, hostname: ms.webshield.io}
     - This provides the Additional Authentication Data, the code will knows the secret name so will pass in, if user tried to swap encrypted secret the code will break.
 - Use TLS to connect to AWS
 
