@@ -13,19 +13,21 @@ gulp.task('nsp', function (cb) {
   gulpNSP({ package: __dirname + '/package.json' }, cb);
 });
 
-gulp.task('tjshint', function () {
+gulp.task('jshint', function () {
   return gulp.src(SOURCE_CODE)
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish'))
     .pipe(jshint.reporter('fail'));
 });
 
-gulp.task('tjscs', function () {
+gulp.task('jscs', function () {
   return gulp.src(SOURCE_CODE)
     .pipe(jscs())
     .pipe(jscs.reporter())
     .pipe(jscs.reporter('fail'));
 });
+
+gulp.task('pp', ['jshint', 'jscs']);
 
 gulp.task('pre-test', function () {
   return gulp.src(SOURCE_CODE)
@@ -33,15 +35,14 @@ gulp.task('pre-test', function () {
     .pipe(istanbul.hookRequire());
 });
 
-gulp.task('test', ['pre-test'], function () {
+gulp.task('test', ['pre-test', 'pp'], function () {
   return gulp.src(TESTS)
     .pipe(mocha())
     .pipe(istanbul.writeReports())
     .pipe(istanbul.enforceThresholds({ thresholds: { statements: 80, lines: 80, functions: 80, branches: 40 } }));
 });
 
-gulp.task('pp', ['tjshint', 'tjscs']);
-gulp.task('build', ['tjshint', 'tjscs', 'test']);
+gulp.task('build', ['test']);
 gulp.task('release', ['build', 'nsp']);
 
 gulp.task('default', ['build']);
