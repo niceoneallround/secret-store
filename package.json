@@ -1,6 +1,6 @@
 {
   "name": "secret-store",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Stores secrets",
   "main": "lib/secretStore.js",
   "scripts": {
