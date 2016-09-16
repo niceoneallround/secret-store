@@ -84,16 +84,16 @@ describe('kmsWrapper Tests', function () {
       return kmsW.promiseEncrypt({
         Plaintext: 'plan-text',
         EncryptionContext: 'http://econtext.test.com/key_service/com/abc' })
-        .then(function (cipherText) {
-            assert(false, 'should have failed');
+        .then(function () {
+            assert(false, 'should have failed so if get here then barf');
           },
 
           function (err) {
             // and ok error so just swallow error;
+            assert(err, 'An error should have been passed in');
 
           });
     }); // 3.2
   }); //3
-
 
 });

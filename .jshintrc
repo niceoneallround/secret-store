@@ -1,4 +1,6 @@
 {
+  "predef": ["describe", "it", "before", "after"],
+  "exported": ["should"],
   "curly": true,
   "indent": 2,
   "node": true,

@@ -1,10 +1,12 @@
 {
   "name": "secret-store",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Stores secrets",
   "main": "lib/secretStore.js",
   "scripts": {
-    "test": "gulp"
+    "test": "gulp test",
+    "build": "gulp build",
+    "release": "gulp release"
   },
   "repository": {
     "type": "git",
@@ -19,6 +21,7 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "gulp": "^3.9.1",
+    "gulp-buddy.js": "^1.0.0",
     "gulp-istanbul": "^1.0.0",
     "gulp-jscs": "^4.0.0",
     "gulp-jshint": "^2.0.1",
@@ -28,6 +31,7 @@
     "jshint-stylish": "^2.2.0"
   },
   "dependencies": {
-    "aws-sdk": "^2.4.12"
+    "aws-sdk": "^2.4.12",
+    "http-status": "^0.2.3"
   }
 }
